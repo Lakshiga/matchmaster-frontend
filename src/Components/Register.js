@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import '../css/Register.css';
+import '../Css/Register.css';
 
 const Register = () => {
   const [step, setStep] = useState(1);

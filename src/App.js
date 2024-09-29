@@ -6,8 +6,8 @@ import Login from './Components/Login';
 import Register from './Components/Register';
 import AdminDashboard from './Components/AdminDashboard';
 import OrganizerDashboard from './Components/OrganizerDashboard';
-import PrivateRoute from './components/PrivateRoute';
-import ProtectedRoute from './components/ProtectedRoute'; // Import the ProtectedRoute
+import PrivateRoute from './Components/PrivateRoute';
+import ProtectedRoute from './Components/ProtectedRoute'; // Import the ProtectedRoute
 
 import './App.css';
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import '../css/OrganizerDashboard.css'; // Adjust this path based on your file structure
+import '../Css/OrganizerDashboard.css'; // Adjust this path based on your file structure
 
 const OrganizerDashboard = () => {
   const [eventData, setEventData] = useState({
