@@ -32,7 +32,7 @@ const Register = () => {
     };
 
     try {
-      const response = await axios.post('http://localhost:5000/api/users/register', userData);
+      const response = await axios.post('http://localhost:4000/api/auth/register', userData);
 
       if (response.status === 201) {
         setSuccess('User registered successfully!');

@@ -32,15 +32,15 @@ const OrganizerDashboard = () => {
         const config = { headers: { Authorization: `Bearer ${token}` } };
 
         // Fetch organizer status
-        const organizerStatus = await axios.get('http://localhost:5000/api/organizer/status', config);
+        const organizerStatus = await axios.get('http://localhost:4000/api/organizer/status', config);
         setIsVerified(organizerStatus.data.verified);
 
         // Fetch umpire verifications
-        const umpireRes = await axios.get('http://localhost:5000/api/organizer/unverified-umpires', config);
+        const umpireRes = await axios.get('http://localhost:4000/api/organizer/unverified-umpires', config);
         setUmpireVerifications(umpireRes.data);
 
         // Fetch player verifications
-        const playerRes = await axios.get('http://localhost:5000/api/organizer/unverified-players', config);
+        const playerRes = await axios.get('http://localhost:4000/api/organizer/unverified-players', config);
         setPlayerVerifications(playerRes.data);
 
       } catch (error) {
@@ -95,7 +95,7 @@ const OrganizerDashboard = () => {
       };
 
       const res = await axios.post(
-        'http://localhost:5000/api/events/create-event',
+        'http://localhost:4000/api/events/create-event',
         { ...eventData, players, umpires },
         config
       );
@@ -130,7 +130,7 @@ const OrganizerDashboard = () => {
       };
 
       const res = await axios.post(
-        'http://localhost:5000/api/matches/create-match',
+        'http://localhost:4000/api/matches/create-match',
         { eventName, player1, player2, umpire },
         config
       );
@@ -157,7 +157,7 @@ const OrganizerDashboard = () => {
   const verifyUmpire = async (id) => {
     try {
       const config = { headers: { Authorization: `Bearer ${token}` } };
-      await axios.post(`http://localhost:5000/api/users/verify-umpire/${id}`, {}, config);
+      await axios.post(`http://localhost:4000/api/users/verify-umpire/${id}`, {}, config);
       setUmpireVerifications((prev) => prev.filter((ump) => ump._id !== id));
       alert('Umpire verified successfully');
     } catch (error) {
@@ -170,7 +170,7 @@ const OrganizerDashboard = () => {
   const verifyPlayer = async (id) => {
     try {
       const config = { headers: { Authorization: `Bearer ${token}` } };
-      await axios.post(`http://localhost:5000/api/users/verify-player/${id}`, {}, config);
+      await axios.post(`http://localhost:4000/api/users/verify-player/${id}`, {}, config);
       setPlayerVerifications((prev) => prev.filter((player) => player._id !== id));
       alert('Player verified successfully');
     } catch (error) {
