@@ -34,7 +34,7 @@ const Register = () => {
     try {
       const response = await axios.post('http://localhost:4000/api/auth/register', userData);
 
-      if (response.status === 201) {
+      if (response.status === 200) {
         setSuccess('User registered successfully!');
         alert('Registration successful!');
         navigate('/login');
@@ -162,6 +162,13 @@ const Register = () => {
 
         {step === 2 && role === 'Player' && (
           <>
+            <input
+              type="text"
+              placeholder="Contact Number"
+              value={contactNumber}
+              onChange={(e) => setContactNumber(e.target.value)}
+              required
+            />
             <button type="submit">Register</button>
           </>
         )}

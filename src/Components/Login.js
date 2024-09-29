@@ -18,7 +18,7 @@ const Login = () => {
         password,
       });
 
-      if (res.data.token) {
+      if (res.data.isVerified) {
         const { token, role } = res.data;
 
         localStorage.setItem('token', token);
@@ -35,7 +35,7 @@ const Login = () => {
           navigate('/');
         }
       } else {
-        setError('Login failed. Invalid credentials.');
+        setError('waiting for admin verification.');
       }
     } catch (err) {
       setError('Login failed. Please check your email and password.');
