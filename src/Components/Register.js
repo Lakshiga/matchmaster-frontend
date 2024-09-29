@@ -25,7 +25,7 @@ const Register = () => {
       email,
       password,
       role,
-      contactNumber: role === 'Umpire' || role === 'Organizer' ? contactNumber : undefined,
+      contactNumber: role === 'Umpire' || role === 'Organizer' || role === 'Player' ? contactNumber : undefined,
       organizationName: role === 'Organizer' ? organizationName : undefined,
       organizationId: role === 'Organizer' ? organizationId : undefined,
       certificationLevel: role === 'Umpire' ? certificationLevel : undefined
@@ -117,7 +117,7 @@ const Register = () => {
           <>
             <input
               type="text"
-              placeholder="Contact Number"
+              placeholder="ContactNumber"
               value={contactNumber}
               onChange={(e) => setContactNumber(e.target.value)}
               required
@@ -151,7 +151,7 @@ const Register = () => {
             />
             <input
               type="text"
-              placeholder="Contact Number"
+              placeholder="ContactNumber"
               value={contactNumber}
               onChange={(e) => setContactNumber(e.target.value)}
               required
@@ -164,7 +164,7 @@ const Register = () => {
           <>
             <input
               type="text"
-              placeholder="Contact Number"
+              placeholder="ContactNumber"
               value={contactNumber}
               onChange={(e) => setContactNumber(e.target.value)}
               required

@@ -18,7 +18,7 @@ const Login = () => {
         password,
       });
 
-      if (res.data.isVerified) {
+      if ((res.data.role==='Organizer' && res.data.isVerified)|| (res.data.role !=='Organizer')) {
         const { token, role } = res.data;
 
         localStorage.setItem('token', token);
