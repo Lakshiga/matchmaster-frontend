@@ -18,26 +18,33 @@ const Login = () => {
         password,
       });
 
-      if ((res.data.role==='Organizer' && res.data.isVerified)|| (res.data.role !=='Organizer')) {
-        const { token, role } = res.data;
+      const { token, role, isVerified } = res.data;
 
-        localStorage.setItem('token', token);
-        localStorage.setItem('role', role);
+      // Store the token and role in local storage
+      localStorage.setItem('token', token);
+      localStorage.setItem('role', role);
 
-        if (role && role.toLowerCase() === 'admin') {
-          alert('Login successful as admin.');
-          navigate('/admin-dashboard');
-        } else if (role && role.toLowerCase() === 'organizer') {
+      // Check if the user is an organizer and if they are verified
+      if (role && role.toLowerCase() === 'organizer') {
+        if (isVerified) {
           alert('Login successful as organizer.');
           navigate('/organizer-dashboard');
         } else {
-          alert('Login successful.');
-          navigate('/');
+          setError('Your account is awaiting admin verification.');
         }
-      } else {
-        setError('waiting for admin verification.');
+      } 
+      // Check if the user is an admin
+      else if (role && role.toLowerCase() === 'admin') {
+        alert('Login successful as admin.');
+        navigate('/admin-dashboard');
+      } 
+      // If the user has any other role
+      else {
+        alert('Login successful.');
+        navigate('/');
       }
     } catch (err) {
+      // Set an error message for failed login
       setError('Login failed. Please check your email and password.');
     }
   };
@@ -63,7 +70,7 @@ const Login = () => {
         />
         <button type="submit">Login</button>
       </form>
-      <p>Don't have an account? </p>
+      <p>Don't have an account?</p>
       <p><a href="/register">Register here</a></p>
     </div>
   );

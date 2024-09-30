@@ -17,7 +17,7 @@ const AdminDashboard = () => {
     const fetchUsers = async () => {
       try {
         const config = { headers: { Authorization: `Bearer ${token}` } };
-        const res = await axios.get('http://localhost:5000/api/users/AllUser', config); 
+        const res = await axios.get('http://localhost:4000/api/auth/AllUser', config); 
         setUsers(res.data.users || []); // Set all users, default to empty array if undefined
         setUnverifiedOrganizers(res.data.unverifiedOrganizers || []); // Set unverified organizers
       } catch (err) {
@@ -38,7 +38,7 @@ const AdminDashboard = () => {
     setVerifyingOrganizer(id); // Show "Verifying..." for the specific organizer
     try {
       const config = { headers: { Authorization: `Bearer ${token}` } };
-      await axios.put(`http://localhost:5000/api/users/AllUser/${id}/verify`, {}, config);
+      await axios.put(`http://localhost:4000/api/auth/AllUser/${id}/verify`, {}, config);
       // Remove verified organizer from the list
       setUnverifiedOrganizers((prev) => prev.filter((org) => org._id !== id));
       alert('Organizer verified successfully!, Organizer can now access their dashboard. ');
@@ -66,7 +66,6 @@ const AdminDashboard = () => {
       <table>
         <thead>
           <tr>
-            <th>Name</th>
             <th>Email</th>
             <th>Role</th>
             <th>Status</th>
@@ -77,7 +76,6 @@ const AdminDashboard = () => {
           {users.length > 0 ? (
             users.map((user) => (
               <tr key={user._id}>
-                <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td>{user.role}</td>
                 <td>{user.verified ? 'Verified' : 'Not Verified'}</td>
