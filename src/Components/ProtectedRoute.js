@@ -1,13 +1,9 @@
-import React from 'react';
-import { Navigate } from 'react-router-dom';
+import React from "react";
+import { Navigate } from "react-router-dom";
 
-const ProtectedRoute = ({ isAuthenticated, isVerified, role, children }) => {
-  if (!isAuthenticated) {
+const ProtectedRoute = ({ role, children }) => {
+  if (role === "") {
     return <Navigate to="/login" />;
-  }
-
-  if (role === 'Organizer' && !isVerified) {
-    return <Navigate to="/not-verified" />;
   }
 
   return children;

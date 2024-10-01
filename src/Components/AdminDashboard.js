@@ -9,6 +9,7 @@ const AdminDashboard = () => {
   const [verifyingOrganizer, setVerifyingOrganizer] = useState(null); // Store verifying organizer ID
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [activeTab, setActiveTab] = useState('users'); // Manage active tab
   const navigate = useNavigate();
 
   const token = localStorage.getItem('token'); // Retrieve token from localStorage
@@ -39,9 +40,8 @@ const AdminDashboard = () => {
     try {
       const config = { headers: { Authorization: `Bearer ${token}` } };
       await axios.put(`http://localhost:4000/api/auth/AllUser/${id}/verify`, {}, config);
-      // Remove verified organizer from the list
       setUnverifiedOrganizers((prev) => prev.filter((org) => org._id !== id));
-      alert('Organizer verified successfully!, Organizer can now access their dashboard. ');
+      alert('Organizer verified successfully! Organizer can now access their dashboard.');
     } catch (err) {
       console.error('Error verifying organizer:', err);
       setError('Failed to verify organizer.');
@@ -54,14 +54,8 @@ const AdminDashboard = () => {
     return <div className="loading">Loading...</div>; // Loading spinner
   }
 
-  return (
-    <div className="admin-dashboard">
-      <header>
-        <h1>Admin Dashboard</h1>
-      </header>
-
-      {error && <p className="error-message">{error}</p>}
-
+  const renderUsersTable = () => (
+    <div>
       <h2>All Users</h2>
       <table>
         <thead>
@@ -100,7 +94,11 @@ const AdminDashboard = () => {
           )}
         </tbody>
       </table>
+    </div>
+  );
 
+  const renderUnverifiedOrganizersTable = () => (
+    <div>
       <h2>Unverified Organizers</h2>
       <table>
         <thead>
@@ -118,15 +116,11 @@ const AdminDashboard = () => {
                 <td>{org.email}</td>
                 <td>
                   <button
-                     onClick={() => {
-                     console.log('Verifying organizer:', org._id); // Debugging step
-                     verifyOrganizer(org._id);
-                     }}
-                     disabled={verifyingOrganizer === org._id}
-                     >  
-                     {verifyingOrganizer === org._id ? 'Verifying...' : 'Verify'}
-                   </button>
-
+                    onClick={() => verifyOrganizer(org._id)}
+                    disabled={verifyingOrganizer === org._id}
+                  >
+                    {verifyingOrganizer === org._id ? 'Verifying...' : 'Verify'}
+                  </button>
                 </td>
               </tr>
             ))
@@ -137,12 +131,82 @@ const AdminDashboard = () => {
           )}
         </tbody>
       </table>
+    </div>
+  );
 
-      <footer>
-        <p>Admin Dashboard © 2024</p>
-      </footer>
+  return (
+    <div className="admin-dashboard-container">
+      <aside className="sidebar">
+        <ul>
+          <li
+            className={activeTab === 'users' ? 'active' : ''}
+            onClick={() => setActiveTab('users')}
+          >
+            Users
+          </li>
+          <li
+            className={activeTab === 'organizers' ? 'active' : ''}
+            onClick={() => setActiveTab('organizers')}
+          >
+            Organizers
+          </li>
+          <li
+            className={activeTab === 'payment' ? 'active' : ''}
+            onClick={() => setActiveTab('payment')}
+          >
+            Payment
+          </li>
+          <li
+            className={activeTab === 'events' ? 'active' : ''}
+            onClick={() => setActiveTab('events')}
+          >
+            Events
+          </li>
+          <li
+            className={activeTab === 'matches' ? 'active' : ''}
+            onClick={() => setActiveTab('matches')}
+          >
+            Matches
+          </li>
+        </ul>
+      </aside>
+
+      <main className="content">
+        <header>
+          <h1>Admin Dashboard</h1>
+        </header>
+
+        {error && <p className="error-message">{error}</p>}
+
+        {/* Conditionally render based on the active tab */}
+        {activeTab === 'users' && renderUsersTable()}
+        {activeTab === 'organizers' && renderUnverifiedOrganizersTable()}
+        {activeTab === 'payment' && (
+          <div>
+            <h2>Payment Information</h2>
+            <p>Payment information will be displayed here.</p>
+          </div>
+        )}
+        {activeTab === 'events' && (
+          <div>
+            <h2>Events Management</h2>
+            <p>Event-related data will be displayed here.</p>
+          </div>
+        )}
+        {activeTab === 'matches' && (
+          <div>
+            <h2>Matches Management</h2>
+            <p>Match-related data will be displayed here.</p>
+          </div>
+        )}
+
+        <footer>
+          <p>Admin Dashboard © 2024</p>
+        </footer>
+      </main>
     </div>
   );
 };
 
 export default AdminDashboard;
+
