@@ -17,8 +17,9 @@ const EventWidget = () => {
       try {
         const config = { headers: { Authorization: `Bearer ${token}` } };
 
+        const userId = localStorage.getItem('userId');
         const events = await axios.get(
-          "http://localhost:4000/api/event/events",
+          `http://localhost:4000/api/event/events-by-organizer/${userId}`,
           config
         );
         setEvents(events.data);

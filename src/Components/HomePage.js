@@ -14,6 +14,8 @@ const HomePage = () => {
               <li><Link to="/about">About</Link></li>
               <li><Link to="/login">Login</Link></li>
               <li><Link to="/register">Register</Link></li>
+              <li><Link to="/events">Events</Link></li> {/* New Events Link */}
+
             </ul>
           </div>
         </nav>

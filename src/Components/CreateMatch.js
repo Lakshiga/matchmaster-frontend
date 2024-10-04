@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import '../css/CreateMatch.css'; // Import the CSS file
+import '../Css/CreateMatch.css'; // Adjust the CSS file path
 
 const CreateMatch = () => {
   const [name, setName] = useState('');
@@ -20,12 +20,12 @@ const CreateMatch = () => {
 
     const players = [player1, player2];
 
-    // Retrieve token from local storage or context
+    // Retrieve token from local storage
     const token = localStorage.getItem('token');
 
     try {
       const res = await axios.post(
-        'http://localhost:5000/api/matches/match',
+        'http://localhost:5000/api/match/create-match',
         { name, type, players },
         {
           headers: {
@@ -54,39 +54,59 @@ const CreateMatch = () => {
 
   return (
     <div className="create-match-container">
-      <h1>Create Match</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Match Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
-        <input
-          type="text"
-          placeholder="Match Type"
-          value={type}
-          onChange={(e) => setType(e.target.value)}
-          required
-        />
-        <input
-          type="text"
-          placeholder="Player 1"
-          value={player1}
-          onChange={(e) => setPlayer1(e.target.value)}
-          required
-        />
-        <input
-          type="text"
-          placeholder="Player 2"
-          value={player2}
-          onChange={(e) => setPlayer2(e.target.value)}
-          required
-        />
-        <button type="submit">Create Match</button>
-      </form>
-      {error && <p className="error-message">{error}</p>}
+      <div className="card">
+        <h2 className="card-title">Create Match</h2>
+        <form onSubmit={handleSubmit} className="card-form">
+          <div className="form-group">
+            <label htmlFor="match-name">Match Name</label>
+            <input
+              id="match-name"
+              type="text"
+              placeholder="Enter match name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="match-type">Match Type</label>
+            <input
+              id="match-type"
+              type="text"
+              placeholder="Enter match type"
+              value={type}
+              onChange={(e) => setType(e.target.value)}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="player-1">Player 1</label>
+            <input
+              id="player-1"
+              type="text"
+              placeholder="Enter Player 1 name"
+              value={player1}
+              onChange={(e) => setPlayer1(e.target.value)}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="player-2">Player 2</label>
+            <input
+              id="player-2"
+              type="text"
+              placeholder="Enter Player 2 name"
+              value={player2}
+              onChange={(e) => setPlayer2(e.target.value)}
+              required
+            />
+          </div>
+          <button type="submit" className="card-btn">
+            Create Match
+          </button>
+        </form>
+        {error && <p className="error-message">{error}</p>}
+      </div>
     </div>
   );
 };

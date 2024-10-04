@@ -1,0 +1,64 @@
+/* CreateEvent.css */
+
+.create-event-container {
+    width: 50%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .create-event-container h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .create-event-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .create-event-container input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+  
+  .create-event-container input[type="text"]:focus {
+    border-color: #00aaff;
+  }
+  
+  .create-event-container button[type="button"],
+  .create-event-container button[type="submit"] {
+    padding: 10px;
+    background-color: #00aaff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .create-event-container button[type="button"]:hover,
+  .create-event-container button[type="submit"]:hover {
+    background-color: #0088cc;
+  }
+  
+  .create-event-container h3 {
+    margin-top: 20px;
+    color: #555;
+  }
+  
+  .create-event-container .error {
+    color: red;
+    font-size: 14px;
+    margin-top: -10px;
+  }
+  
